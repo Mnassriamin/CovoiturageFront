@@ -1,0 +1,77 @@
+<div class="container mt-5">
+  <h2 class="text-center mb-4 text-primary">Gestion des Covoitureurs</h2>
+
+  <hr>
+
+  <!-- List of Covoitureurs -->
+  <div class="card shadow-lg">
+    <div class="card-header bg-info text-white">
+      <h4 class="mb-0">Liste des Covoitureurs</h4>
+    </div>
+    <div class="card-body p-0">
+      <div class="table-responsive">
+        <table class="table table-bordered table-striped table-hover align-middle">
+          <thead class="table-dark">
+            <tr>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Phone</th>
+              <th>Email</th>
+              <th class="text-center">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let covoitureur of covoitureurs">
+              <!-- First Name -->
+              <td>
+                <span *ngIf="editingCovoitureur?.id !== covoitureur.id">{{ covoitureur.nom }}</span>
+                <input *ngIf="editingCovoitureur?.id === covoitureur.id" [(ngModel)]="editingCovoitureur.nom" class="form-control" placeholder="Enter First Name">
+              </td>
+
+              <!-- Last Name -->
+              <td>
+                <span *ngIf="editingCovoitureur?.id !== covoitureur.id">{{ covoitureur.prenom }}</span>
+                <input *ngIf="editingCovoitureur?.id === covoitureur.id" [(ngModel)]="editingCovoitureur.prenom" class="form-control" placeholder="Enter Last Name">
+              </td>
+
+              <!-- Phone -->
+              <td>
+                <span *ngIf="editingCovoitureur?.id !== covoitureur.id">{{ covoitureur.telephone }}</span>
+                <input *ngIf="editingCovoitureur?.id === covoitureur.id" [(ngModel)]="editingCovoitureur.telephone" class="form-control" placeholder="Enter Phone">
+              </td>
+
+              <!-- Email -->
+              <td>
+                <span *ngIf="editingCovoitureur?.id !== covoitureur.id">{{ covoitureur.email }}</span>
+                <input *ngIf="editingCovoitureur?.id === covoitureur.id" [(ngModel)]="editingCovoitureur.email" class="form-control" placeholder="Enter Email">
+              </td>
+
+              <!-- Actions -->
+              <td class="text-center">
+                <div *ngIf="editingCovoitureur?.id !== covoitureur.id">
+                  <button class="btn btn-sm btn-success me-2" (click)="editCovoitureur(covoitureur)">
+                    <i class="bi bi-pencil-square"></i> Edit
+                  </button>
+                  <button class="btn btn-sm btn-danger" (click)="deleteCovoitureur(covoitureur.id)">
+                    <i class="bi bi-trash"></i> Delete
+                  </button>
+                </div>
+                <div *ngIf="editingCovoitureur?.id === covoitureur.id">
+                  <button class="btn btn-sm btn-primary me-2" (click)="updateCovoitureur()">
+                    <i class="bi bi-check-circle"></i> Save
+                  </button>
+                  <button class="btn btn-sm btn-warning" (click)="cancelEdit()">
+                    <i class="bi bi-x-circle"></i> Cancel
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="card-footer text-muted text-center">
+      Total Covoitureurs: {{ covoitureurs.length }}
+    </div>
+  </div>
+</div>

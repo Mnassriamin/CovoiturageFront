@@ -1,0 +1,83 @@
+<div class="register-form">
+  <h2>Register Conducteur</h2>
+  <form (ngSubmit)="register()" #registerForm="ngForm">
+    <div>
+      <label>Nom:</label>
+      <input type="text" [(ngModel)]="conducteurData.nom" name="nom" required />
+    </div>
+    <div>
+      <label>Prénom:</label>
+      <input
+        type="text"
+        [(ngModel)]="conducteurData.prenom"
+        name="prenom"
+        required
+      />
+    </div>
+    <div>
+      <label>Email:</label>
+      <input
+        type="email"
+        [(ngModel)]="conducteurData.email"
+        name="email"
+        required
+      />
+    </div>
+    <div>
+      <label>Téléphone:</label>
+      <input
+        type="text"
+        [(ngModel)]="conducteurData.telephone"
+        name="telephone"
+        required
+      />
+    </div>
+    <div>
+      <label>Password:</label>
+      <input
+        type="password"
+        [(ngModel)]="conducteurData.password"
+        name="password"
+        required
+      />
+    </div>
+    <h4>Vehicule :</h4>
+    <div>
+      <label>Marque:</label>
+      <input
+        type="text"
+        [(ngModel)]="conducteurData.marque"
+        name="marque"
+        required
+      />
+    </div>
+    <div>
+      <label>Modèle:</label>
+      <input
+        type="text"
+        [(ngModel)]="conducteurData.modele"
+        name="modele"
+        required
+      />
+    </div>
+    <div>
+      <label>Immatriculation:</label>
+      <input
+        type="text"
+        [(ngModel)]="conducteurData.immatriculation"
+        name="immatriculation"
+        required
+      />
+    </div>
+    <div>
+      <label>Nombre des sièges:</label>
+      <input
+        type="text"
+        [(ngModel)]="conducteurData.sieges"
+        name="sieges"
+        required
+      />
+    </div>
+    <button type="submit">Register</button>
+  </form>
+</div>

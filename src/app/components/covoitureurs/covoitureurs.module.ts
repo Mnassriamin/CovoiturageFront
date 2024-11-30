@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { UtilisateursRoutingModule } from './utilisateurs-routing.module';
+import { CovoitureursRoutingModule } from './covoitureurs-routing.module';
 
 
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
-    UtilisateursRoutingModule
+    CovoitureursRoutingModule
   ]
 })
-export class UtilisateursModule { }
+export class CovoitureursModule { }

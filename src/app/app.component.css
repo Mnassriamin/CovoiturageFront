@@ -1,0 +1,17 @@
+
+.navbar {
+    padding: 0.5rem 1rem;
+  }
+  .navbar .nav-link {
+    color: #ffffff !important;
+  }
+  .navbar .dropdown-menu {
+    background-color: #343a40; /* Dark background */
+  }
+  .navbar .dropdown-item {
+    color: #ffffff !important;
+  }
+  .navbar .dropdown-item:hover {
+    background-color: #495057; /* Slightly lighter on hover */
+  }
+  

@@ -1,1 +1,118 @@
-<p>trajets works!</p>
+<div class="container mt-4">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="text-primary fw-bold">My Trajets</h2>
+    <a
+      *ngIf="userName && userType === 'Conducteur'"
+      class="btn btn-primary btn-lg shadow-sm"
+      href="./trajets/add"
+      role="button"
+    >
+      <i class="bi bi-plus-circle me-2"></i>Add Trajet
+    </a>
+  </div>
+
+  <div class="table-responsive shadow-sm">
+    <table class="table table-striped table-hover align-middle">
+      <thead class="table-dark">
+        <tr>
+          <th>Lieu de départ</th>
+          <th>Lieu d'arrivée</th>
+          <th>Date et heure</th>
+          <th>Prix</th>
+          <th class="text-center">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let trajet of trajets">
+          <td>{{ trajet.lieuDepart }}</td>
+          <td>{{ trajet.lieuArrivee }}</td>
+          <td>{{ trajet.dateHeure | date: 'EEEE, dd MMMM yyyy, HH:mm' }}</td>
+          <td>{{ trajet.prix }} TND</td>
+          <td class="text-center">
+            <div *ngIf="userName && userType === 'Conducteur'">
+              <button
+                class="btn btn-outline-secondary btn-sm me-1"
+                (click)="editTrajet(trajet)"
+              >
+                <i class="bi bi-pencil-square"></i> Edit
+              </button>
+              <button
+                class="btn btn-outline-danger btn-sm"
+                (click)="deleteTrajet(trajet.id)"
+              >
+                <i class="bi bi-trash"></i> Delete
+              </button>
+            </div>
+            <div *ngIf="userName && userType === 'Covoitureur'">
+              <button
+                class="btn btn-outline-info btn-sm"
+                (click)="viewTrajet(trajet.id)"
+              >
+                <i class="bi bi-eye"></i> View
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Edit Trajet Form -->
+  <div *ngIf="editingTrajet" class="card mt-4 shadow-lg">
+    <div class="card-header bg-success text-white text-center">
+      <h3>Edit Trajet</h3>
+    </div>
+    <div class="card-body">
+      <form (submit)="updateTrajet()">
+        <div class="mb-3">
+          <label for="editLieuDepart" class="form-label fw-bold">Lieu de départ</label>
+          <input
+            id="editLieuDepart"
+            [(ngModel)]="editingTrajet.lieuDepart"
+            name="editLieuDepart"
+            class="form-control"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <label for="editLieuArrivee" class="form-label fw-bold">Lieu d'arrivée</label>
+          <input
+            id="editLieuArrivee"
+            [(ngModel)]="editingTrajet.lieuArrivee"
+            name="editLieuArrivee"
+            class="form-control"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <label for="editDateHeure" class="form-label fw-bold">Date et heure</label>
+          <input
+            id="editDateHeure"
+            [(ngModel)]="editingTrajet.dateHeure"
+            name="editDateHeure"
+            type="datetime-local"
+            class="form-control"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <label for="editPrix" class="form-label fw-bold">Prix</label>
+          <input
+            id="editPrix"
+            [(ngModel)]="editingTrajet.prix"
+            name="editPrix"
+            type="number"
+            class="form-control"
+            required
+          />
+        </div>
+        <div class="d-flex justify-content-end">
+          <button class="btn btn-success me-2"><i class="bi bi-check-circle"></i> Save Changes</button>
+          <button class="btn btn-secondary" (click)="cancelEdit()">
+            <i class="bi bi-x-circle"></i> Cancel
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

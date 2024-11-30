@@ -1,1 +1,77 @@
-<p>conducteurs works!</p>
+<div class="container mt-5">
+  <h2 class="text-center mb-4 text-primary">Gestion des Conducteurs</h2>
+
+  <hr>
+
+  <!-- List of Conducteurs -->
+  <div class="card shadow-lg">
+    <div class="card-header bg-info text-white">
+      <h4 class="mb-0">Liste des Conducteurs</h4>
+    </div>
+    <div class="card-body p-0">
+      <div class="table-responsive">
+        <table class="table table-bordered table-striped table-hover align-middle">
+          <thead class="table-dark">
+            <tr>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Phone</th>
+              <th>Email</th>
+              <th class="text-center">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let conducteur of conducteurs">
+              <!-- First Name -->
+              <td>
+                <span *ngIf="editingConducteur?.id !== conducteur.id">{{ conducteur.nom }}</span>
+                <input *ngIf="editingConducteur?.id === conducteur.id" [(ngModel)]="editingConducteur.nom" class="form-control" placeholder="Enter First Name">
+              </td>
+
+              <!-- Last Name -->
+              <td>
+                <span *ngIf="editingConducteur?.id !== conducteur.id">{{ conducteur.prenom }}</span>
+                <input *ngIf="editingConducteur?.id === conducteur.id" [(ngModel)]="editingConducteur.prenom" class="form-control" placeholder="Enter Last Name">
+              </td>
+
+              <!-- Phone -->
+              <td>
+                <span *ngIf="editingConducteur?.id !== conducteur.id">{{ conducteur.telephone }}</span>
+                <input *ngIf="editingConducteur?.id === conducteur.id" [(ngModel)]="editingConducteur.telephone" class="form-control" placeholder="Enter Phone">
+              </td>
+
+              <!-- Email -->
+              <td>
+                <span *ngIf="editingConducteur?.id !== conducteur.id">{{ conducteur.email }}</span>
+                <input *ngIf="editingConducteur?.id === conducteur.id" [(ngModel)]="editingConducteur.email" class="form-control" placeholder="Enter Email">
+              </td>
+
+              <!-- Actions -->
+              <td class="text-center">
+                <div *ngIf="editingConducteur?.id !== conducteur.id">
+                  <button class="btn btn-sm btn-success me-2" (click)="editConducteur(conducteur)">
+                    <i class="bi bi-pencil-square"></i> Edit
+                  </button>
+                  <button class="btn btn-sm btn-danger" (click)="deleteConducteur(conducteur.id)">
+                    <i class="bi bi-trash"></i> Delete
+                  </button>
+                </div>
+                <div *ngIf="editingConducteur?.id === conducteur.id">
+                  <button class="btn btn-sm btn-primary me-2" (click)="updateConducteur()">
+                    <i class="bi bi-check-circle"></i> Save
+                  </button>
+                  <button class="btn btn-sm btn-warning" (click)="cancelEdit()">
+                    <i class="bi bi-x-circle"></i> Cancel
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="card-footer text-muted text-center">
+      Total Conducteurs: {{ conducteurs.length }}
+    </div>
+  </div>
+</div>

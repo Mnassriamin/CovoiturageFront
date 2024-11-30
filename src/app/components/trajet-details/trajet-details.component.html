@@ -1,0 +1,46 @@
+<div class="container mt-5">
+  <!-- Loading Spinner -->
+  <div *ngIf="isLoading" class="text-center">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+    <p class="mt-3">Loading...</p>
+  </div>
+
+  <!-- Error Message -->
+  <div *ngIf="!isLoading && error" class="alert alert-danger text-center">
+    {{ error }}
+  </div>
+
+  <!-- Trajet Details -->
+  <div *ngIf="!isLoading && trajet" class="card shadow-lg">
+    <div class="card-header bg-primary text-white text-center">
+      <h2>Trajet Details</h2>
+    </div>
+    <div class="card-body">
+      <h4 class="text-muted mb-4">Trajet Information</h4>
+      <p><strong>Lieu de départ:</strong> {{ trajet.lieuDepart }}</p>
+      <p><strong>Lieu d'arrivée:</strong> {{ trajet.lieuArrivee }}</p>
+      <p>
+        <strong>Date et Heure:</strong>
+        {{ trajet.dateHeure | date: 'EEEE, dd MMMM yyyy, HH:mm' }}
+      </p>
+      <p><strong>Prix:</strong> {{ trajet.prix | currency: 'TND' }}</p>
+
+      <h4 class="text-muted mt-4 mb-4">Conducteur Information</h4>
+      <p *ngIf="trajet.conducteurNom"><strong>Nom:</strong> {{ trajet.conducteurNom }}</p>
+      <p *ngIf="trajet.conducteurPrenom"><strong>Prénom:</strong> {{ trajet.conducteurPrenom }}</p>
+      <p *ngIf="trajet.conducteurTelephone">
+        <strong>Téléphone:</strong> {{ trajet.conducteurTelephone }}
+      </p>
+    </div>
+    <div class="text-center mt-4">
+      <button class="btn btn-primary" (click)="applyForTrajet()" [disabled]="hasApplied">
+        Apply for this Trajet
+      </button>
+      <p *ngIf="hasApplied" class="text-warning mt-2">
+        You have already applied for this trajet.
+      </p>
+    </div>
+  </div>
+</div>

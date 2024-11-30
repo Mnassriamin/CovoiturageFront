@@ -1,0 +1,27 @@
+<div class="container mt-5">
+  <h2>Register as a Covoitureur</h2>
+  <form (submit)="onRegister()">
+    <div class="mb-3">
+      <label for="nom" class="form-label">Nom</label>
+      <input type="text" class="form-control" id="nom" [(ngModel)]="covoitureur.nom" name="nom" required />
+    </div>
+    <div class="mb-3">
+      <label for="prenom" class="form-label">Prenom</label>
+      <input type="text" class="form-control" id="prenom" [(ngModel)]="covoitureur.prenom" name="prenom" required />
+    </div>
+    <div class="mb-3">
+      <label for="email" class="form-label">Email</label>
+      <input type="email" class="form-control" id="email" [(ngModel)]="covoitureur.email" name="email" required />
+    </div>
+    <div class="mb-3">
+      <label for="telephone" class="form-label">Telephone</label>
+      <input type="text" class="form-control" id="telephone" [(ngModel)]="covoitureur.telephone" name="telephone" required />
+    </div>
+    <div class="mb-3">
+      <label for="password" class="form-label">Password</label>
+      <input type="password" class="form-control" id="password" [(ngModel)]="covoitureur.password" name="password" required />
+    </div>
+    <button type="submit" class="btn btn-primary">Register</button>
+    <p *ngIf="errorMessage" class="text-danger mt-2">{{ errorMessage }}</p>
+  </form>
+</div>

@@ -1,0 +1,61 @@
+<div class="container mt-5">
+  <h2 class="text-center mb-4">Add Trajet</h2>
+  <form (submit)="createTrajet()" class="needs-validation" novalidate>
+    <div class="mb-3">
+      <label for="lieuDepart" class="form-label">Lieu de départ:</label>
+      <input
+        id="lieuDepart"
+        [(ngModel)]="newTrajet.lieuDepart"
+        name="lieuDepart"
+        type="text"
+        class="form-control"
+        placeholder="Enter lieu de départ"
+        required
+      />
+      <div class="invalid-feedback">Lieu de départ is required.</div>
+    </div>
+
+    <div class="mb-3">
+      <label for="lieuArrivee" class="form-label">Lieu d'arrivée:</label>
+      <input
+        id="lieuArrivee"
+        [(ngModel)]="newTrajet.lieuArrivee"
+        name="lieuArrivee"
+        type="text"
+        class="form-control"
+        placeholder="Enter lieu d'arrivée"
+        required
+      />
+      <div class="invalid-feedback">Lieu d'arrivée is required.</div>
+    </div>
+
+    <div class="mb-3">
+      <label for="dateHeure" class="form-label">Date et Heure:</label>
+      <input
+        id="dateHeure"
+        [(ngModel)]="newTrajet.dateHeure"
+        name="dateHeure"
+        type="datetime-local"
+        class="form-control"
+        required
+      />
+      <div class="invalid-feedback">Date et Heure is required.</div>
+    </div>
+
+    <div class="mb-3">
+      <label for="prix" class="form-label">Prix:</label>
+      <input
+        id="prix"
+        [(ngModel)]="newTrajet.prix"
+        name="prix"
+        type="number"
+        class="form-control"
+        placeholder="Enter prix"
+        required
+      />
+      <div class="invalid-feedback">Prix is required.</div>
+    </div>
+
+    <button type="submit" class="btn btn-primary w-100">Add Trajet</button>
+  </form>
+</div>
