@@ -148,8 +148,8 @@ export class ApiService {
     return this.http.get(`${this.baseUrl}/reservations/${covoitureurId}`);
   }
   
-  confirmReservation(reservationId: number): Observable<any> {
-    return this.http.put(`${this.baseUrl}/reservations/confirm/${reservationId}`, null);
+  confirmReservation(reservationId: number): Observable<void> {
+    return this.http.put<void>(`${this.baseUrl}/reservations/confirm/${reservationId}`, null);
   }
   
   // Fetch conducteur details (including vehicle information)
@@ -163,6 +163,12 @@ getCovoitureurDetails(id: number): Observable<any> {
 }
 getUserProfile(userId: number): Observable<any> {
   return this.http.get(`${this.baseUrl}/utilisateurs/profile?userId=${userId}`);
+}
+getTrajetDetailsWithReservations(trajetId: number): Observable<any> {
+  return this.http.get(`${this.baseUrl}/trajets/${trajetId}/details`, {
+    withCredentials: true,
+});
+  
 }
 
 }

@@ -12,14 +12,18 @@ import { CommonModule } from '@angular/common';
 })
 export class ReservationsComponent implements OnInit {
   reservations: any[] = [];
-  covoitureurId: string | null = null;
+  covoitureurId: number | null = null; // Ensuring consistent type as 'number'
   error: string | null = null;
   isLoading = true;
 
   constructor(private apiService: ApiService, private cookieService: CookieService) {}
 
   ngOnInit(): void {
-    this.covoitureurId = this.cookieService.get('userId');
+    const userId = this.cookieService.get('userId');
+    if (userId) {
+      this.covoitureurId = parseInt(userId, 10); // Parse as a number
+    }
+
     if (this.covoitureurId) {
       this.fetchReservations();
     } else {
@@ -29,37 +33,30 @@ export class ReservationsComponent implements OnInit {
   }
 
   fetchReservations(): void {
-    this.isLoading = true;
-    this.apiService.getReservationsByCovoitureur(+this.covoitureurId!).subscribe(
-      (data) => {
-        console.log('Fetched reservations:', data);
-        this.reservations = data;
+    if (!this.covoitureurId) {
+        this.error = 'Covoitureur ID is null.';
         this.isLoading = false;
-      },
-      (error) => {
-        console.error('Error fetching reservations:', error);
-        this.error = 'Failed to load reservations.';
-        this.isLoading = false;
-      }
+        return;
+    }
+
+    this.apiService.getReservationsByCovoitureur(this.covoitureurId).subscribe(
+        (reservations: any[]) => { // Assuming the backend response is an array
+            console.log('Raw Reservations:', reservations); // Debug log the raw response
+            this.reservations = reservations.map((reservation: any) => ({
+                ...reservation,
+                id: reservation.reservationId, // Map reservationId to id
+                confirme: !!reservation.confirme // Ensure boolean format
+            }));
+            this.isLoading = false;
+            console.log('Mapped Reservations:', this.reservations); // Debug log
+        },
+        (error) => {
+            console.error('Error fetching reservations:', error);
+            this.error = 'Failed to load reservations.';
+            this.isLoading = false;
+        }
     );
   }
 
-  confirmReservation(reservationId: number): void {
-    if (confirm('Are you sure you want to confirm this reservation?')) {
-      this.apiService.confirmReservation(reservationId).subscribe(
-        () => {
-          alert('Reservation confirmed!');
-          this.fetchReservations(); // Refresh reservations
-        },
-        (error) => {
-          console.error('Error confirming reservation:', error);
-          alert('Failed to confirm the reservation. Please try again.');
-        }
-      );
-    }
-  }
-
-  isReservationForTrajet(trajetId: number): boolean {
-    return this.reservations.some((reservation) => reservation.trajet.id === trajetId);
-  }
+  
 }

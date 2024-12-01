@@ -1,8 +1,11 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
   <div class="container">
+    <!-- Brand Name -->
     <a class="navbar-brand fw-bold text-light" href="/">
       <i class="bi bi-car-front-fill me-2"></i>Covoiturage
     </a>
+    
+    <!-- Mobile Toggle Button -->
     <button
       class="navbar-toggler border-0"
       type="button"
@@ -14,20 +17,32 @@
     >
       <span class="navbar-toggler-icon"></span>
     </button>
+    
+    <!-- Navbar Links -->
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto align-items-center">
+        
+        <!-- Login Button -->
         <li class="nav-item" *ngIf="!userName">
           <a class="nav-link btn btn-outline-light rounded-pill px-3 py-2 mx-1" href="/login">Login</a>
         </li>
+        
+        <!-- Sign Up Button -->
         <li class="nav-item" *ngIf="!userName">
           <a class="nav-link btn btn-primary rounded-pill px-3 py-2 mx-1" href="/signup">Sign Up</a>
         </li>
+        
+        <!-- Trajets Link -->
         <li class="nav-item" *ngIf="userName">
-          <a class="nav-link text-light" href="/trajets">Trajets</a>
+          <a class="nav-link text-light" href="/trajets">Journeys</a>
         </li>
+        
+        <!-- Reservations Link (For Covoitureurs) -->
         <li class="nav-item" *ngIf="userName && userType === 'Covoitureur'">
           <a class="nav-link text-light" href="/reservations">My Reservations</a>
         </li>
+        
+        <!-- User Dropdown Menu -->
         <li class="nav-item dropdown" *ngIf="userName">
           <a
             class="nav-link dropdown-toggle text-light"
@@ -42,11 +57,16 @@
           <ul class="dropdown-menu dropdown-menu-end shadow">
             <li><a class="dropdown-item" href="/profile"><i class="bi bi-person me-2"></i>Profile</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item text-danger" href="#" (click)="logout()"><i class="bi bi-box-arrow-right me-2"></i>Logout</a></li>
+            <li>
+              <a class="dropdown-item text-danger" href="#" (click)="logout()">
+                <i class="bi bi-box-arrow-right me-2"></i>Logout
+              </a>
+            </li>
           </ul>
         </li>
       </ul>
     </div>
   </div>
 </nav>
+
 <router-outlet></router-outlet>

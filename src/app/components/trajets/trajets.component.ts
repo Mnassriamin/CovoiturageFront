@@ -78,6 +78,7 @@ export class TrajetsComponent implements OnInit {
       }
     );
   }
+  
 
   addTrajet(): void {
     if (
